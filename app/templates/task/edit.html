@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} Update Task {% endblock %}
+
+{% block content %}
+
+<form method="POST" action="">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Edit" class="btn btn-primary w-100">
+</form>
+
+<br>
+
+<h4>Do not want to edit the Task? <a href="{% url 'app:tasks' %}">tasks page</a></h4>
+
+{% endblock %}

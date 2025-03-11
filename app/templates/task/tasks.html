@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} Tasks {% endblock %}
+
+{% block content %}
+
+<form method="POST" action="" class="bg-light p-3 rounded">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Create" class="btn btn-primary w-100">
+</form>
+<br><br>
+
+{% if tasks %}
+{% for task in tasks %}
+<br>
+<div class="bg-light text-dark text-center p-3 rounded">
+	<h3 style="{% if task.finished %}text-decoration: line-through;{% endif %}">{{ task.text }}</h3>
+	<hr>
+	<a href="{{ task.task_edit }}" class="btn btn-primary w-25 {% if task.finished %}disabled{% endif %}">Edit</a>
+	<a href="{{ task.task_delete }}" class="btn btn-danger w-25">Delete</a>
+	<a href="{{ task.task_finish }}" class="btn btn-warning w-25 {% if task.finished %}disabled{% endif %}">Finish</a>
+</div>
+<br>
+{% endfor %}
+{% else %}
+<h3 align="center">There are not any tasks yet</h3>
+{% endif %}
+
+{% endblock %}
