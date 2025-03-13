@@ -38,8 +38,16 @@ class TaskEditView(View):
 	template_name = 'task/edit.html'
 	form_class = TaskCreateEditForm
 
+	def setup(self, request, *args, **kwargs):
+		self.task_instance = get_object_or_404(Task, pk=kwargs['pk'])
+		return super().setup(request, *args, **kwargs)
+
+	def dispatch(self, request, *args, **kwargs):
+		if self.task_instance.finished == True: return redirect('app:tasks')
+		return super().dispatch(request, *args, **kwargs)
+
 	def get(self, request, **kwargs):
-		task = get_object_or_404(Task, pk=kwargs['pk'])
+		task = self.task_instance
 		form = self.form_class(instance=task)
 		return render(request, self.template_name, {'form':form})
 
