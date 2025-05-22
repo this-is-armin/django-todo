@@ -1,4 +1,4 @@
-## Task Management App with Django - Python
+## Task Management App (CRUD) with Django - Python
 
 # Installing
 ### Run the following command:
